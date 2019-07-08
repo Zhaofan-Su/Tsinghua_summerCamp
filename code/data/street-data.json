@@ -1,0 +1,97 @@
+[{
+		"code": "A",
+		"street": "JieFangBei Street",
+		"alias": "JieFangBei",
+		"sh_rate": 15,
+		"sz_rate": 26,
+		"rate": 77
+	},
+	{
+		"code": "B",
+		"street": "HongHuang Road",
+		"alias": "HongHuang",
+		"sh_rate": 51,
+		"sz_rate": 26,
+		"rate": 41
+	},
+	{
+		"code": "C",
+		"street": "UniversityCity Road",
+		"alias": "UniversirtCity",
+		"sh_rate": 828,
+		"sz_rate": 1471,
+		"rate": 20
+	},
+	{
+		"code": "D",
+		"street": "HongYaDong Street",
+		"alias": "HongYaDong",
+		"sh_rate": 66,
+		"sz_rate": 47,
+		"rate": 18
+	},
+	{
+		"code": "E",
+		"street": "HaungTuDi Road",
+		"alias": "HuangTuDi",
+		"sh_rate": 50,
+		"sz_rate": 49,
+		"rate": 68
+	},
+	{
+		"code": "F",
+		"street": "HanYu road",
+		"alias": "HanYu",
+		"sh_rate": 103,
+		"sz_rate": 68,
+		"rate": 53
+	},
+	{
+		"code": "G",
+		"street": "LinJiang Road",
+		"alias": "LinJiang",
+		"sh_rate": 73,
+		"sz_rate": 34,
+		"rate": 43
+	},
+	{
+		"code": "H",
+		"street": "BinJiang Road",
+		"alias": "BinJiang",
+		"sh_rate": 4,
+		"sz_rate": 7,
+		"rate": 11
+	},
+	{
+		"code": "I",
+		"street": "ShuangHuang Road",
+		"alias": "ShuangHuang",
+		"sh_rate": 60,
+		"sz_rate": 204,
+		"rate": 16
+	},
+	{
+		"code": "J",
+		"street": "DaShiBa Road",
+		"alias": "DaShiBa",
+		"sh_rate": 64,
+		"sz_rate": 27,
+		"rate": 36
+	},
+	{
+		"code": "K",
+		"street": "RenMin Road",
+		"alias": "RenMin",
+		"sh_rate": 74,
+		"sz_rate": 63,
+		"rate": 58
+	},
+	{
+		"code": "L",
+		"street": "SiXin Road",
+		"alias": "SiXin",
+		"sh_rate": 17,
+		"sz_rate": 36,
+		"rate": 53
+	}
+]

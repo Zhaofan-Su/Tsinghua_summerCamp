@@ -1,0 +1,58 @@
+.start {
+  height: 700px;
+  width: 100%;
+}
+
+#login {
+  position: fixed;
+  top: 260px;
+  left: 500px;
+  overflow: hidden;
+}
+
+.in {
+  color: #73aae5;
+  font-size: 1.3em;
+  text-align: right;
+  display: inline-block;
+  cursor: pointer;
+  margin: 8px 10px;
+  width: 150px;
+}
+
+.write {
+  font-size: inherit;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  border-bottom: 1px solid #73aae5;
+}
+
+.write:focus {
+  border: none;
+  border-bottom: 1px solid #73aae5;
+  outline: none;
+}
+
+input[type="password"] {
+  letter-spacing: 5px;
+  -webkit-text-security: circle;
+  text-security: circle;
+}
+
+#btn {
+  position: fixed;
+  left: 650px;
+  top: 380px;
+  background-color: transparent;
+  border: 1px solid #73aae0;
+  color: #73aae5;
+  padding: 8px 25px;
+  border-radius: 4px;
+}
+
+#btn:hover {
+  background-color: #73aae0;
+  color: #fff;
+  cursor: pointer;
+}

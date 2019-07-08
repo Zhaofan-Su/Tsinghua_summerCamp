@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>Real-time detection of public parking Spaces in Chongqing</title>
+	<link rel="stylesheet" type="text/css" href="css/app.css" />
+	<link rel="stylesheet" type="text/css" href="css/new.css" />
+
+</head>
+
+<body>
+
+	<header id="header">
+		<h3 class="header-title">Real-time parking Spaces in Chongqing</h3>
+		<div class="header-info header-info-l">Data Source：Chongqing P.S.T management DB</div>
+		<div class="header-info header-info-r">Real-time data time：<span id="nowDate"></span></div>
+	</header>
+
+	<footer id="footer"></footer>
+
+	<div id="container">
+		<div class="start" style="height: 700px;width: 100%">
+			<div id="login">
+				<p><label class="in">Username: </label><input type="username" id="username" text="text_field" class="write">
+				</p>
+				<p><label class="in">Password: </label><input type="password" id="password" text="text_field" class="write"></p>
+				<div id="login_button">
+					<input type="button" id="btn" value="Login">
+				</div>
+
+			</div>
+		</div>
+
+		<div id="flexCon">
+			<div class="flex-row">
+				<div class="flex-cell flex-cell-l">
+					<div class="chart-wrapper">
+						<h3 class="chart-title">Top 10 utilization rate in the district</h3>
+						<div class="chart-div" id="rankChart">
+							<div class="chart-loader">
+								<div class="loader"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="flex-cell flex-cell-c" style="padding-right:0;">
+					<div class="chart-wrapper">
+						<h3 class="chart-title">All city packing codition</h3>
+						<div class="chart-div">
+							<img src="img/all_city.jpg" width="500px" height="280px">
+						</div>
+					</div>
+				</div>
+
+				<div class="flex-cell flex-cell-r" style="padding-left:0;">
+					<div class="chart-wrapper">
+						<h3 class="chart-title">Statistical data</h3>
+						<div class="chart-div chart-done">
+							<table class="data-t">
+								<tr>
+									<th><img src="img/icon-02.png" /></th>
+									<td>
+										<p><span id="connected_cameras">0</span></p>
+										<p>Connnected cam's sum</p>
+									</td>
+									<!-- <th><img src="img/icon-02.png" /></th>
+									<td>
+										<p><span id="listedSecurity">0</span></p>
+										<p>上市证券数</p>
+									</td> -->
+								</tr>
+								<tr>
+									<th><img src="img/icon-06.png" /></th>
+									<td>
+										<p><span id="vehicle_flow">0</span></p>
+										<p>Vehicle flowrate</p>
+									</td>
+									<!-- <th><img src="img/icon-04.png" /></th>
+									<td>
+										<p><span id="circulationMarket">0</span></p>
+										<p>股票流通市值（亿元）</p>
+									</td> -->
+								</tr>
+								<tr>
+									<th><img src="img/icon-05.png" /></th>
+									<td>
+										<p><span id="conjected_zones">0</span></p>
+										<p>Predicted congestion zone</p>
+									</td>
+									<!-- <th><img src="img/icon-06.png" /></th>
+									<td>
+										<p><span id="szRatio">0</span></p>
+										<p>深市平均市盈率</p>
+									</td> -->
+								</tr>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="flex-row">
+				<div class="flex-cell flex-cell-lc" style="padding-bottom:0;">
+					<div class="chart-wrapper">
+						<h3 class="chart-title">Usage condition throughout the day</h3>
+						<div class="chart-div" id="trendChart">
+							<div class="chart-loader">
+								<div class="loader"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flex-cell flex-cell-r" style="padding-bottom:0;">
+					<div class="chart-wrapper">
+						<h3 class="chart-title">Utilization rates in main streets</h3>
+						<div class="chart-div" id="csrcChart">
+							<div class="chart-loader">
+								<div class="loader"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/countUp.min.js"></script>
+	<script type="text/javascript" src="js/echarts.min.js"></script>
+	<script type="text/javascript" src="js/echarts-map-china.js"></script>
+	<script type="text/javascript" src="js/echarts-theme-shine.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//获取当天日期
+			(function () {
+				const now = new Date();
+				const year = now.getFullYear();
+				const month = now.getMonth() + 1;
+				const day = now.getDate();
+				$("#nowDate").html(year + "-" + month + "-" + day);
+			})();
+
+			$('#btn').click(function () {
+				$('.start').hide()
+
+				//获取统计数据
+				$.ajax({
+					url: "data/count.json",
+					dataType: "json"
+				}).done(function (data) {
+					console.log(data)
+					rollNum("connected_cameras", 0, data.connected_cameras);
+					rollNum("vehicle_flow", 0, data.vehicle_flow);
+					rollNum("conjected_zones", 0, data.conjected_zones);
+				}).fail(function (jqXHR, textStatus) {
+					console.log("Ajax Error: ", textStatus);
+				});
+
+				//获取排行数据
+				const rankChart = echarts.init(document.getElementById("rankChart"), "shine");
+				const rankChartOpt = {
+					tooltip: {
+						trigger: "axis",
+						axisPointer: {
+							type: "shadow"
+						},
+						formatter: function (params) {
+							const param = params[0];
+							const marker =
+								'<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#e6b600;"></span>';
+							const suffix = '<span style="margin-left:5px;font-size:12px;">%</span>';
+							return param.name + "<br />" +
+								marker + "Ranking：" + (param.dataIndex + 1) + "<br />" +
+								marker + "Utilization rate of parking space：" + param.value + suffix;
+						}
+					},
+					grid: {
+						top: 10,
+						bottom: 10,
+						left: 80
+					},
+					xAxis: {
+						show: false,
+						type: "value"
+					},
+					yAxis: {
+						type: "category",
+						inverse: true,
+						axisLine: {
+							show: false
+						},
+						axisTick: {
+							show: false
+						},
+						axisLabel: {
+							fontSize: 12,
+							color: "#b0c2f9"
+						}
+					},
+					series: [{
+						name: "Top10 of utilization rate of parking space in district",
+						type: "bar",
+						barCategoryGap: "60%",
+						label: {
+							show: true,
+							position: "right",
+							fontSize: 12,
+							color: "#188df0",
+							emphasis: {
+								color: "#e6b600"
+							}
+						},
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 1, 1, 1,
+									[{
+											offset: 0,
+											color: '#b0c2f9'
+										},
+										{
+											offset: 0.5,
+											color: '#188df0'
+										},
+										{
+											offset: 1,
+											color: '#185bff'
+										}
+									]
+								)
+							},
+							emphasis: {
+								color: new echarts.graphic.LinearGradient(
+									0, 1, 1, 1,
+									[{
+											offset: 0,
+											color: '#b0c2f9'
+										},
+										{
+											offset: 0.7,
+											color: '#e6b600'
+										},
+										{
+											offset: 1,
+											color: '#ceac09'
+										}
+									]
+								)
+							}
+						}
+					}]
+				};
+				rankChart.setOption(rankChartOpt);
+				$.ajax({
+					url: "data/ranking-list.json",
+					dataType: "json"
+				}).done(function () {
+					$("#rankChart").addClass("chart-done");
+				}).done(function (data) {
+					const xData = [];
+					const yData = [];
+					for (let i in data) {
+						xData.push(data[i].occupy_rate);
+						yData.push(data[i].name);
+					}
+					rankChart.setOption({
+						yAxis: {
+							data: yData
+						},
+						series: [{
+							name: "Utilization rate of parking space in district",
+							data: xData
+						}]
+					});
+				}).fail(function (jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+				//获取当天停车位使用情况
+				const trendChart = echarts.init(document.getElementById("trendChart"), "shine");
+				const trendChartOpt = {
+					tooltip: {
+						trigger: "axis",
+						axisPointer: {
+							type: "none"
+						}
+					},
+					legend: {
+						left: "center",
+						bottom: 3,
+						itemWidth: 15,
+						itemHeight: 10,
+						textStyle: {
+							fontSize: 12,
+							color: "#b0c2f9"
+						},
+						data: ["Usage in the city", "Yubei District usage", "Utilization rate in the city"]
+					},
+					grid: {
+						top: 40,
+						bottom: 50,
+						left: 80,
+						right: 60
+					},
+					xAxis: {
+						type: "category",
+						axisLine: {
+							lineStyle: {
+								color: "#b0c2f9"
+							}
+						},
+						axisTick: {
+							show: false
+						},
+						axisLabel: {
+							fontSize: 12,
+							color: "#b0c2f9"
+						}
+					},
+					yAxis: [{
+						name: "",
+						type: "value",
+						splitNumber: 5,
+						axisLine: {
+							lineStyle: {
+								color: "#b0c2f9"
+							}
+						},
+						splitLine: {
+							show: false
+						},
+						axisTick: {
+							color: "#b0c2f9"
+						},
+						axisLabel: {
+							fontSize: 12,
+							color: "#b0c2f9",
+							formatter: (value, index) => {
+								return value / 1000000 + "million";
+							}
+						}
+					}, {
+						name: "occupy_rate",
+						type: "value",
+						splitNumber: 5,
+						maxInterval: 5,
+						minInterval: 5,
+						interval: 5,
+						axisLine: {
+							lineStyle: {
+								color: "#b0c2f9"
+							}
+						},
+						splitLine: {
+							show: false
+						},
+						axisTick: {
+							color: "#b0c2f9"
+						},
+						axisLabel: {
+							fontSize: 12,
+							color: "#b0c2f9"
+						}
+					}],
+					visualMap: {
+						show: false,
+						seriesIndex: 2,
+						dimension: 0,
+						pieces: [{
+							lte: 9,
+							color: "rgba(176, 58, 91, 1)"
+						}, {
+							gt: 9,
+							lte: 11,
+							color: "rgba(176, 58, 91, 0.5)"
+						}]
+					},
+					series: [{
+						name: "usage in the city",
+						type: "pictorialBar",
+						symbol: 'path://d="M150 50 L130 130 L170 130  Z"',
+						barCategoryGap: "40%",
+						itemStyle: {
+							color: function (params) {
+								if (params.dataIndex >= 10) {
+									return "rgba(119, 96, 246, 0.5)";
+								}
+								return "rgba(119, 96, 246, 1)";
+							}
+						},
+						markPoint: {
+							itemStyle: {
+								color: "rgba(119, 96, 246, 1)"
+							},
+							data: [{
+								name: "max",
+								type: "max"
+							}]
+						},
+						markLine: {
+							lineStyle: {
+								color: "rgba(119, 96, 246, 1)"
+							},
+							label: {
+								position: "middle",
+								formatter: "Average parking space usage in 24 hours of the city：{c}"
+							},
+							data: [{
+								name: "average",
+								type: "average"
+							}]
+						}
+					}, {
+						name: "Yubei district usage",
+						type: "pictorialBar",
+						symbol: 'path://d="M150 50 L130 130 L170 130  Z"',
+						barCategoryGap: "40%",
+						itemStyle: {
+							color: function (params) {
+								if (params.dataIndex >= 10) {
+									return "rgba(230, 182, 0, 0.5)";
+								}
+								return "rgba(230, 182, 0, 1)";
+							}
+						},
+						markPoint: {
+							itemStyle: {
+								color: "rgba(230, 182, 0, 1)"
+							},
+							data: [{
+								name: "max",
+								type: "max"
+							}]
+						},
+						markLine: {
+							lineStyle: {
+								color: "rgba(230, 182, 0, 1)"
+							},
+							label: {
+								position: "middle",
+								formatter: "24-hour parking space usage in the Yubei district：{c}"
+							},
+							data: [{
+								name: "average",
+								type: "average"
+							}]
+						}
+					}, {
+						name: "Utilization rate in the city",
+						type: "line",
+						yAxisIndex: 1
+					}]
+				};
+				trendChart.setOption(trendChartOpt);
+				$.ajax({
+					url: "data/day-count.json",
+					dataType: "json"
+				}).done(function () {
+					$("#trendChart").addClass("chart-done");
+				}).done(function (data) {
+					const xData = [];
+					const yData1 = [];
+					const yData2 = [];
+					const yData3 = [];
+					for (let i in data) {
+						xData.push(data[i].hour);
+						yData1.push(data[i].city_usage);
+						yData2.push(data[i].center_usage);
+						yData3.push(data[i].center_occupy_rate);
+					}
+					trendChart.setOption({
+						xAxis: {
+							data: xData,
+						},
+						series: [{
+							name: "Usage in the city",
+							data: yData1
+						}, {
+							name: "Yubei district usage",
+							data: yData2
+						}, {
+							name: "Utilization rate in the city",
+							data: yData3
+						}]
+					});
+				}).fail(function (jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+				//获取各个街道车位
+				const csrcChart = echarts.init(document.getElementById("csrcChart"), "shine");
+				const csrcChartOpt = {
+					tooltip: {
+						trigger: "item",
+						formatter: "{b0}<br />parking usage：{c0}<br />occupy rate：{d0}%"
+					},
+					legend: {
+						type: "scroll",
+						orient: "vertical",
+						padding: 0,
+						top: 15,
+						right: -3,
+						itemGap: 5,
+						itemWidth: 10,
+						itemHeight: 10,
+						textStyle: {
+							fontSize: 10,
+							color: "#b0c2f9"
+						}
+					},
+					series: [{
+						name: "Utilization rate of parking Spaces in main streets",
+						type: "pie",
+						roseType: 'radius',
+						color: ['#b15bff', '#ff5151', '#02df82', '#9393ff', '#51a2da', '#9fe7b8', '#f6db5a', '#ed9e7d',
+							'#e062ae', '#62c6e9', '#6fe0e3', '#e97092',
+						],
+						center: ["40%", "50%"],
+						radius: ["30%", "85%"],
+						label: {
+							normal: {
+								show: false
+							},
+							emphasis: {
+								show: true
+							}
+						},
+						labelLine: {
+							normal: {
+								show: false
+							},
+							emphasis: {
+								show: true
+							}
+						}
+					}]
+				};
+				csrcChart.setOption(csrcChartOpt);
+				$.ajax({
+					url: "data/street-data.json",
+					dataType: "json"
+				}).done(function () {
+					$("#csrcChart").addClass("chart-done");
+				}).done(function (data) {
+					const chartData = [];
+					for (let i in data) {
+						chartData.push({
+							name: data[i].alias,
+							value: data[i].rate
+						});
+					}
+					csrcChart.setOption({
+						series: [{
+							name: "Utilization rate in main streets",
+							data: chartData
+						}]
+					});
+				}).fail(function (jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+				//浏览器窗口大小变化时，重置报表大小
+				$(window).resize(function () {
+					rankChart.resize();
+					trendChart.resize();
+					csrcChart.resize();
+				});
+			});
+		})
+
+		//数字变化特效
+		function rollNum(elId, startVal, endVal, decimalNum) {
+			console.log(startVal, endVal)
+			let n = decimalNum || 0;
+			let countUp = new CountUp(elId, startVal, endVal, n, 2.5, {
+				useEasing: true,
+				useGrouping: true,
+				separator: ',',
+				decimal: '.'
+			});
+			if (!countUp.error) {
+				countUp.start();
+			} else {
+				console.error(countUp.error);
+			}
+		}
+	</script>
+</body>
+
+</html>

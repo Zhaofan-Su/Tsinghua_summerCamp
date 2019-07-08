@@ -1,0 +1,61 @@
+[{
+		"order": 1,
+		"code": "601398",
+		"name": "Yu Zhong",
+		"occupy_rate": 79.5
+	},
+	{
+		"order": 2,
+		"code": "601857",
+		"name": "Jiang Bei",
+		"occupy_rate": 60.2
+	},
+	{
+		"order": 3,
+		"code": "601288",
+		"name": "Yu Bei",
+		"occupy_rate": 58.4
+	},
+	{
+		"order": 4,
+		"code": "601988",
+		"name": "Jiang Jin",
+		"occupy_rate": 53.7
+	},
+	{
+		"order": 5,
+		"code": "601318",
+		"name": "Jiu Long Po",
+		"occupy_rate": 45.2
+	},
+	{
+		"order": 6,
+		"code": "600519",
+		"name": "Kai Zhou",
+		"occupy_rate": 40.8
+	},
+	{
+		"order": 7,
+		"code": "600028",
+		"name": "Wan Zhou",
+		"occupy_rate": 20.9
+	},
+	{
+		"order": 8,
+		"code": "600036",
+		"name": "He Chuan",
+		"occupy_rate": 15.6
+	},
+	{
+		"order": 9,
+		"code": "601628",
+		"name": "Yong Chuan",
+		"occupy_rate": 12.4
+	},
+	{
+		"order": 10,
+		"code": "601088",
+		"name": "Ba Nan",
+		"occupy_rate": 9.8
+	}
+]

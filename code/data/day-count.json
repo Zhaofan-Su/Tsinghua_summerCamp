@@ -1,0 +1,217 @@
+[{
+		"hour": "0:00",
+		"city_usage": 1030420,
+		"center_usage": 150503,
+		"ciry_occupy_rate": 68.69,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "1:00",
+		"city_usage": 1030521,
+		"center_usage": 150003,
+		"center_occupy_rate": 68.70,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "2:00",
+		"city_usage": 1040521,
+		"center_usage": 44281.8,
+		"center_occupy_rate": 69.37,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "3:00",
+		"city_usage": 1040521,
+		"center_usage": 34107.67,
+		"center_occupy_rate": 69.37,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "4:00",
+		"city_usage": 1030521,
+		"center_usage": 38396.92,
+		"center_occupy_rate": 69.37,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "5:00",
+		"city_usage": 1030521,
+		"center_usage": 31271.66,
+		"center_occupy_rate": 69.37,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "6:00",
+		"city_usage": 1020840,
+		"center_usage": 32764.68,
+		"center_occupy_rate": 68.06,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "7:00",
+		"city_usage": 800021,
+		"center_usage": 28885.38,
+		"center_occupy_rate": 53.33,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "8:00",
+		"city_usage": 601020,
+		"center_usage": 21689.22,
+		"center_occupy_rate": 40.07,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "9:00",
+		"city_usage": 500060,
+		"center_usage": 24566.14,
+		"center_occupy_rate": 33.33,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "10:00",
+		"city_usage": 807082,
+		"center_usage": 29652.15,
+		"center_occupy_rate": 53.81,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "11:00",
+		"city_usage": 1007082,
+		"center_usage": 30985.4,
+		"center_occupy_rate": 67.14,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "12:00",
+		"city_usage": 1007082,
+		"center_usage": 58096.59,
+		"center_occupy_rate": 67.14,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "13:00",
+		"city_usage": 1107082,
+		"center_usage": 32855.64,
+		"center_occupy_rate": 73.81,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "14:00",
+		"city_usage": 1107082,
+		"center_usage": 44281.8,
+		"center_occupy_rate": 73.81,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "15:00",
+		"city_usage": 1005082,
+		"center_usage": 34107.67,
+		"center_occupy_rate": 67.01,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "16:00",
+		"city_usage": 805075,
+		"center_usage": 38396.92,
+		"center_occupy_rate": 53.67,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "17:00",
+		"city_usage": 0,
+		"center_usage": 0,
+		"center_occupy_rate": 0,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "18:00",
+		"city_usage": 0,
+		"center_usage": 0,
+		"center_occupy_rate": 0,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "19:00",
+		"city_usage": 0,
+		"center_usage": 0,
+		"center_occupy_rate": 0,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "20:00",
+		"city_usage": 0,
+		"center_usage": 0,
+		"center_occupy_rate": 0,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "21:00",
+		"city_usage": 0,
+		"center_usage": 0,
+		"center_occupy_rate": 0,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "22:00",
+		"city_usage": 0,
+		"center_usage": 0,
+		"center_occupy_rate": 0,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	},
+	{
+		"hour": "23:00",
+		"city_usage": 0,
+		"center_usage": 0,
+		"center_occupy_rate": 0,
+		"sz_market_capitalization": 0,
+		"sz_transaction_amount": 0,
+		"sz_pe_ratio": 0
+	}
+]
